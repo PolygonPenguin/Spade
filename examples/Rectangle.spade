@@ -1,0 +1,43 @@
+// Rectangle.spade
+// Represents a rectangle (top-left corner, width, height).
+// Demonstrates the use of 'optional'.
+
+class Rectangle uses Default implements Shape:
+
+Point topLeft;
+Float width;
+Float height;
+optional String name; // Optional name (can be unset).
+
+// Constructor 1: No name provided.
+public Rectangle _construct_(Point topLeft, Float width, Float height) {
+    topLeft = topLeft;
+    width = width;
+    height = height;
+    // 'name' is initially unset.
+    return self;
+}
+
+// Constructor 2: Name provided (overloading).
+public Rectangle _construct_(Point topLeft, Float width, Float height, String name) {
+    topLeft = topLeft;
+    width = width;
+    height = height;
+    name = name;
+    return self;
+}
+
+// Implementation of getArea() from Shape.
+public Float getArea() {
+    return width * height;
+}
+
+// Implementation of toString() from Shape. Handles 'optional'.
+public String toString() {
+    String result = "Rectangle(topLeft=" + topLeft.toString() + ", width=" + width.toString() + ", height=" + height.toString();
+    if (hasValue(name)) { // Use hasValue() to check.
+        result += ", name=" + name;
+    }
+    result += ")";
+    return result;
+}
